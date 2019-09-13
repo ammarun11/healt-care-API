@@ -1,0 +1,64 @@
+{
+  "name": "health-care",
+  "version": "1.0.0",
+  "description": "- Day14 - Projek Healt-care Back-end ++ Task - Trello tugas guyss",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest ./tests/index.spec.js",
+    "dev": "nodemon --inspect ./bin/www",
+    "start": "node ./bin/www",
+    "seed": "node ./seeds/main.seeder.js"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohammadanang/health-care.git"
+  },
+  "author": "m.anangnur@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohammadanang/health-care/issues"
+  },
+  "homepage": "https://github.com/mohammadanang/health-care#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "colonize": "^1.0.2",
+    "cors": "^2.8.5",
+    "cron": "^1.7.2",
+    "debug": "^4.1.1",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "express-validation": "^1.0.2",
+    "express-validator": "^6.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.0",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.3.0",
+    "nodemon": "^1.19.2",
+    "swagger-ui-express": "^4.1.0",
+    "update": "^0.7.4"
+  },
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "jest": "^24.9.0",
+    "request-promise": "^4.2.4",
+    "supertest": "^4.0.2"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "keywords": []
+}

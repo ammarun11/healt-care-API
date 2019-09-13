@@ -1,0 +1,5 @@
+.env
+/jest_0
+/node_modules
+/public/*
+.git.healt-care

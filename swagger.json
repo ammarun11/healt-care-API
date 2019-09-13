@@ -1,0 +1,344 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Health Care API Documentation",
+      "description": "Rest API collection testing using swagger-ui-express in Node.js",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "localhost:3182",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Users",
+        "description": "Users API List"
+      },
+      {
+        "name": "Authentication",
+        "description": "Auth API List"
+      },
+      {
+        "name": "Reset Password",
+        "description": "Reset password for user"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+      "/user": {
+        "post": {
+          "tags": [
+            "Users"
+          ],
+          "description": "Create new user in system",
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User that we want to create",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "summary": "Create users in system",
+          "responses": {
+            "200": {
+              "description": "New user is created",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Get all users in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Users"
+              }
+            }
+          }
+        }
+      },
+      "/user/{userId}": {
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "ID of user that we want to find",
+            "type": "string"
+          }
+        ],
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "Get user with given ID",
+          "responses": {
+            "200": {
+              "description": "User is found",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete user with given ID",
+          "tags": [
+            "Users"
+          ],
+          "responses": {
+            "200": {
+              "description": "User is deleted",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update user with give ID",
+          "tags": [
+            "Users"
+          ],
+          "parameters": [
+            {
+              "name": "user",
+              "in": "body",
+              "description": "User with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "User is updated",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "/login": {
+        "post": {
+            "tags": [
+                "Authentication"
+            ],
+            "summary": "Login User",
+            "parameters": [
+                {
+                  "name": "auth",
+                  "in": "body",
+                  "description": "User that we want to authenticate",
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                        "email": {
+                            "type": "string",
+                            "example": "john.doe@gmail.com"
+                        },
+                        "password": {
+                            "type": "string"
+                        }
+                    }
+                  }
+                }
+            ],
+            "responses": {
+              "200": {
+                "description": "User Authenticated",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "status": {
+                            "type":"string"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "user": {
+                                    "type": "object"
+                                },
+                                "token": {
+                                    "type": "string"
+                                },
+                                "expires_in": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "message": {
+                            "type": "string"
+                        }
+                    }
+                  }
+              }
+            }
+        }
+      },
+      "/reset": {
+        "post":{
+          "tags" : [
+            "Reset Password"
+          ],
+          "description": "Reset password for user",
+          "parameters": [
+            {
+              "name":"email",
+              "in": "body",
+              "description" : "Forgot password user via email and get token",
+              "schema": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "john.doe@gmail.com"
+                    }
+                }
+              }
+            }
+          ],
+          "produces":[
+            "application/json"
+          ],
+          "summary":"Forgot Password User",
+          "responses": {
+            "200": {
+              "description" : "Reset password successfully check your email please~",
+              "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "example": "Success"
+                    },
+                    "message": {
+                      "type":"string",
+                      "example": "Reset password successfully check your email please~"
+                    }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/reset/{token}": {
+          "parameters": [
+            {
+              "name":"token",
+              "in": "path",
+              "required":true,
+              "description" : "Masukan token yang kamu dapat di email",
+              "type": "string"
+            }
+          ],
+          "post":{
+            "summary": "Reset password user with give token",
+            "tags" : [
+              "Reset Password"
+            ],
+            "parameters":[
+              { 
+                "name" : "user",
+                "in" :"body",
+                "description" : "key password dan value dengan password baru",
+                "schema" : {
+                  "type": "object",
+                  "properties": {
+                    "password": {
+                      "type": "string",
+                      "example": "horeakupunyapasswordbaru"
+                    }
+                  }
+                }
+              }
+            ],
+          "produces":[
+            "application/json"
+          ],
+          "summary":"Hasil password baru dan timestamp reset password di created_at",
+          "responses": {
+            "200": {
+              "description" : "Reset Password with token",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "User": {
+        "required": [
+          "email",
+          "_id"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "email": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "name": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "password": {
+              "type": "string",
+              "uniqueItems": true
+          }
+        }
+      },
+      "ResetPassword": {
+        "required": [
+          "email",
+          "token",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "password": {
+              "type": "string",
+              "uniqueItems": true
+          },
+          "token": {
+              "type": "string",
+              "uniqueItems" : true
+          }
+        }
+      }
+    }
+}
